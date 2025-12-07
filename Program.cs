@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Read env vars (fallbacks for local dev)
 var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
-var secret = Environment.GetEnvironmentVariable("JWT_SECRET") ?? "dev_secret_change_me";
+var secret = Environment.GetEnvironmentVariable("JWT_SECRET") ?? "ThisIsA32ByteLongSecretForDev1234";
 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
 
 builder.Services.AddAuthentication(options =>
