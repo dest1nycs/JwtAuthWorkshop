@@ -92,6 +92,12 @@ app.MapGet("/profile", (ClaimsPrincipal user) =>
 // Додаємо захищений роут, що вимагає ролі "admin"
 app.MapGet("/admin", () => Results.Ok("Welcome, Admin!"))
     .RequireAuthorization("AdminOnly");
+// DELETE /users/:id — доступно лише для admin
+app.MapDelete("/users/{id:int}", (int id) =>
+{
+    // Тут можна додати логіку видалення користувача
+    return Results.Ok($"User {id} deleted");
+}).RequireAuthorization("AdminOnly"); // <-- політика "AdminOnly" з кроку 2
 
 // Видаляємо дублювання 'app.Run()' і додаємо використання 'port'
 app.Run($"http://localhost:{port}");
